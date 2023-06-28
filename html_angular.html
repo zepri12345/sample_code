@@ -1,0 +1,95 @@
+<div class="card" ng-if="is_edit">
+    <div class="card-header">
+        <strong>{{ formtitle }}</strong>
+    </div>
+    <div class="card-body">
+        <form name="landaform" novalidate="">
+            <div class="row">
+                <div class="col-md-12 row">
+                    <div class="col-md-6">
+
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label-sm">Heading</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control form-control-sm" ng-model="form.heading"
+                                    maxlength="45" ng-disabled="isView" placeholder="masukan heading" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label-sm">Deskripsi</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control form-control-sm" ng-model="form.deskripsi"
+                                    ng-disabled="isView" cols="30" rows="10"
+                                    placeholder="masukkan deskripsi"></textarea>
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label-sm">File PDF</label>
+
+                            <div class="col-sm-9" ng-if="isCreate && !is_file">
+                                <input accept="application/pdf" base-sixty-four-input=""
+                                    class="form-control form-control-sm" ng-model="form.file" type="file"
+                                    ng-disabled="is_view" />
+                            </div>
+                            <div class="col-sm-4" ng-if="form.file != undefined && is_file">
+                                <input accept="application/pdf" base-sixty-four-input=""
+                                    class="form-control form-control-sm" ng-model="form.file" type="file"
+                                    ng-disabled="is_view" />
+                            </div>
+                            <div class="col-sm-5" ng-if="is_file">
+                                <input type="text" class="form-control form-control-sm" ng-model="form.file" readonly />
+                                <p class="col-form-label col-form-label-sm">*File Pdf Saat ini</p>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label for="" class="col-sm-3 col-form-label-sm">Foto</label>
+                            <div class="col-sm-6">
+                                <div style="overflow: hidden;background-color: rgba(0, 0, 0, 0.23);">
+                                    <img class="img img-responsive img-custom img-thumbnail"
+                                        data-ng-src="data:image/png;base64,{{form.image.base64}}" id="image"
+                                        ng-if="!!form.image.base64" />
+                                    <img class="img img-responsive img-custom img-thumbnail" id="image"
+                                        ng-if="!form.image.base64 && !!form.image"
+                                        ng-src="img/bulletin/{{form.image}}" />
+                                    <img class="img img-responsive img-custom img-thumbnail" id="image"
+                                        ng-if="!form.image.base64 && !form.image" ng-src="img/logo.png"
+                                        style="background-color: #f6f6f6;" />
+                                </div>
+                                <div class="fileUploadr btn btn-primary edit" ng-if="!is_view" style="width: 100%;">
+                                    <input accept="image/*" base-sixty-four-input="" class="upload"
+                                        ng-model="form.image" style="width: 100%;" type="file" />
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="card-footer">
+        <div class="pull-right">
+            <button type="submit" class="btn btn-secondary btn-sm" ng-click="cancel()">
+                <i class="fa fa-arrow-left"></i>
+                &nbsp;Kembali
+            </button>
+            <button type="submit" class="btn btn-primary btn-sm" ng-hide="is_view" button-spinner="loading"
+                ng-disabled="loading" ng-click="save(form)">
+                <i class="fa fa-save"></i>
+                &nbsp;Simpan
+            </button>
+        </div>
+    </div>
+
+
+
+</div>
